@@ -1,0 +1,12 @@
+{
+    "name": "proophsoftware/swoole-monog-test",
+    "description": "Test Swoole with MongoDB",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "ext-swoole": "^4.1",
+        "mongodb/mongodb": "^1.3"
+    }
+}

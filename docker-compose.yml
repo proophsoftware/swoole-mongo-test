@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  server:
+    image: prooph/php:7.2-cli
+    volumes:
+      - .:/app
+    ports:
+      - 8080:9501
+    depends_on:
+      - mongo
+    command: php server.php
+
+  server-pdo:
+    image: prooph/php:7.2-cli
+    volumes:
+      - .:/app
+    ports:
+      - 8081:9501
+    depends_on:
+      - postgres
+      - mysql
+    command: php server-pdo.php
+
+  mongo:
+    image: mongo:4.0.0
+    ports:
+      - 27017:27017
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=test
+
+  mysql:
+    image: mysql
+    command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=test
